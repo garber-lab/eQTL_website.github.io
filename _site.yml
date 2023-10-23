@@ -1,0 +1,6 @@
+name: "eQTL-website"
+navbar:
+  title: "eQTL Website"
+  left:
+    - text: "Home"
+      href: index.html
