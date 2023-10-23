@@ -1,0 +1,11 @@
+# filetypes to ignore
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# filetypes NOT to ignore
+!*.R
+!*.Rmd
+!*.md
+!*.html
