@@ -2,9 +2,22 @@
 title: "eQTL Website"
 ---
 
-Test!
+```{r echo=FALSE}
+dplyr::as_tibble(mtcars)
 
-<div class="header">
-  <h1>Header</h1>
-  <p>My Test Header</p1>
-</div>
+mtcars
+```
+
+
+```{r include=FALSE}
+library(kableExtra)
+```
+
+
+```{r echo=FALSE}
+kable(mtcars) %>%
+  kable_styling()
+```
+
+
+
