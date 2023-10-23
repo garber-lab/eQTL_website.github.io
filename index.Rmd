@@ -3,9 +3,9 @@ title: "eQTL Website"
 ---
 
 ```{r echo=FALSE}
-dplyr::as_tibble(mtcars)
+dplyr::as_tibble(mtcars[1:3, 1:3])
 
-mtcars
+mtcars[1:3, 1:3]
 ```
 
 
@@ -14,9 +14,31 @@ library(kableExtra)
 ```
 
 
+Kable-formatted table:
+
 ```{r echo=FALSE}
-kable(mtcars) %>%
+kable(mtcars[1:3, 1:3]) %>%
   kable_styling()
+```
+
+
+```{r}
+# outputs the HTML to an external file
+kable(mtcars[1:3, 1:3], "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  cat(., file = "df.html")
+```
+
+
+
+
+```{r}
+library(xtable)
+```
+
+
+```{r}
+
 ```
 
 
