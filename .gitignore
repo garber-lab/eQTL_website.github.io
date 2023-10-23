@@ -1,8 +1,9 @@
 # filetypes to ignore
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
+*.Rproj
+*.Rproj.user
+*.Rhistory
+*.RData
+*.Ruserdata
 
 # filetypes NOT to ignore
 !*.R
