@@ -1,6 +1,4 @@
 # filetypes to ignore
-*.Rproj
-*.Rproj.user
 *.Rhistory
 *.RData
 *.Ruserdata
@@ -10,3 +8,8 @@
 !*.Rmd
 !*.md
 !*.html
+!*.Rproj
+
+
+# specific files to ignore
+.Rproj.user
