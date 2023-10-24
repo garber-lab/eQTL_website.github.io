@@ -34,6 +34,14 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.30/datatables.js"></script>
+<link href="site_libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -264,6 +272,17 @@ $(document).ready(function () {
 </div>
 
 
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.2     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.1     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <pre><code>## # A tibble: 3 × 3
 ##     mpg   cyl  disp
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -336,70 +355,221 @@ Datsun 710
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>kable(mtcars[1:3, 1:3], &quot;html&quot;) %&gt;%
-  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
-<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-mpg
-</th>
-<th style="text-align:right;">
-cyl
-</th>
-<th style="text-align:right;">
-disp
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Mazda RX4
-</td>
-<td style="text-align:right;">
-21.0
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-160
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mazda RX4 Wag
-</td>
-<td style="text-align:right;">
-21.0
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-160
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Datsun 710
-</td>
-<td style="text-align:right;">
-22.8
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-108
-</td>
-</tr>
-</tbody>
-</table>
-<pre class="r"><code>library(xtable)</code></pre>
+<pre class="r"><code># prints the HTML below
+kable(mtcars[1:3, 1:3], &quot;html&quot;) %&gt;%
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;%
+  cat()</code></pre>
+<pre><code>## &lt;table class=&quot;table table-striped table-hover&quot; style=&quot;margin-left: auto; margin-right: auto;&quot;&gt;
+##  &lt;thead&gt;
+##   &lt;tr&gt;
+##    &lt;th style=&quot;text-align:left;&quot;&gt;   &lt;/th&gt;
+##    &lt;th style=&quot;text-align:right;&quot;&gt; mpg &lt;/th&gt;
+##    &lt;th style=&quot;text-align:right;&quot;&gt; cyl &lt;/th&gt;
+##    &lt;th style=&quot;text-align:right;&quot;&gt; disp &lt;/th&gt;
+##   &lt;/tr&gt;
+##  &lt;/thead&gt;
+## &lt;tbody&gt;
+##   &lt;tr&gt;
+##    &lt;td style=&quot;text-align:left;&quot;&gt; Mazda RX4 &lt;/td&gt;
+##    &lt;td style=&quot;text-align:right;&quot;&gt; 21.0 &lt;/td&gt;
+##    &lt;td style=&quot;text-align:right;&quot;&gt; 6 &lt;/td&gt;
+##    &lt;td style=&quot;text-align:right;&quot;&gt; 160 &lt;/td&gt;
+##   &lt;/tr&gt;
+##   &lt;tr&gt;
+##    &lt;td style=&quot;text-align:left;&quot;&gt; Mazda RX4 Wag &lt;/td&gt;
+##    &lt;td style=&quot;text-align:right;&quot;&gt; 21.0 &lt;/td&gt;
+##    &lt;td style=&quot;text-align:right;&quot;&gt; 6 &lt;/td&gt;
+##    &lt;td style=&quot;text-align:right;&quot;&gt; 160 &lt;/td&gt;
+##   &lt;/tr&gt;
+##   &lt;tr&gt;
+##    &lt;td style=&quot;text-align:left;&quot;&gt; Datsun 710 &lt;/td&gt;
+##    &lt;td style=&quot;text-align:right;&quot;&gt; 22.8 &lt;/td&gt;
+##    &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+##    &lt;td style=&quot;text-align:right;&quot;&gt; 108 &lt;/td&gt;
+##   &lt;/tr&gt;
+## &lt;/tbody&gt;
+## &lt;/table&gt;</code></pre>
+<pre class="r"><code># converts the HTML to a single character string
+kable(mtcars[1:3, 1:3], &quot;html&quot;) %&gt;%
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;%
+  as.character()</code></pre>
+<pre><code>## [1] &quot;&lt;table class=\&quot;table table-striped table-hover\&quot; style=\&quot;margin-left: auto; margin-right: auto;\&quot;&gt;\n &lt;thead&gt;\n  &lt;tr&gt;\n   &lt;th style=\&quot;text-align:left;\&quot;&gt;   &lt;/th&gt;\n   &lt;th style=\&quot;text-align:right;\&quot;&gt; mpg &lt;/th&gt;\n   &lt;th style=\&quot;text-align:right;\&quot;&gt; cyl &lt;/th&gt;\n   &lt;th style=\&quot;text-align:right;\&quot;&gt; disp &lt;/th&gt;\n  &lt;/tr&gt;\n &lt;/thead&gt;\n&lt;tbody&gt;\n  &lt;tr&gt;\n   &lt;td style=\&quot;text-align:left;\&quot;&gt; Mazda RX4 &lt;/td&gt;\n   &lt;td style=\&quot;text-align:right;\&quot;&gt; 21.0 &lt;/td&gt;\n   &lt;td style=\&quot;text-align:right;\&quot;&gt; 6 &lt;/td&gt;\n   &lt;td style=\&quot;text-align:right;\&quot;&gt; 160 &lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n   &lt;td style=\&quot;text-align:left;\&quot;&gt; Mazda RX4 Wag &lt;/td&gt;\n   &lt;td style=\&quot;text-align:right;\&quot;&gt; 21.0 &lt;/td&gt;\n   &lt;td style=\&quot;text-align:right;\&quot;&gt; 6 &lt;/td&gt;\n   &lt;td style=\&quot;text-align:right;\&quot;&gt; 160 &lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n   &lt;td style=\&quot;text-align:left;\&quot;&gt; Datsun 710 &lt;/td&gt;\n   &lt;td style=\&quot;text-align:right;\&quot;&gt; 22.8 &lt;/td&gt;\n   &lt;td style=\&quot;text-align:right;\&quot;&gt; 4 &lt;/td&gt;\n   &lt;td style=\&quot;text-align:right;\&quot;&gt; 108 &lt;/td&gt;\n  &lt;/tr&gt;\n&lt;/tbody&gt;\n&lt;/table&gt;&quot;</code></pre>
+<p><a href="https://github.com/rstudio/rmarkdown/issues/1296"
+class="uri">https://github.com/rstudio/rmarkdown/issues/1296</a></p>
+<pre class="r"><code># init. car names
+cars &lt;- row.names(mtcars[1:3, 1:3])
+
+# init. search URLs for each car name
+search_urls &lt;- paste0(&quot;https://www.google.com/search?q=&quot;, str_replace_all(cars, &quot; &quot;, &quot;+&quot;))</code></pre>
+<pre class="r"><code>library(googleVis)</code></pre>
+<pre><code>## 
+## Welcome to googleVis version 0.7.1
+## 
+## Please read Google&#39;s Terms of Use
+## before you start using the package:
+## https://developers.google.com/terms/
+## 
+## Note, the plot method of googleVis will by default use
+## the standard browser to display its output.
+## 
+## See the googleVis package vignettes for more details,
+## or visit https://mages.github.io/googleVis/.
+## 
+## To suppress this message use:
+## suppressPackageStartupMessages(library(googleVis))</code></pre>
+<pre class="r"><code>df &lt;- as_tibble(mtcars[1:3, 1:3], rownames = &quot;cars&quot;)
+
+df &lt;- df %&gt;%
+  mutate(url = search_urls)
+
+transform(
+  df,
+  url = paste(&quot;&lt;a href=&quot;, shQuote(url), &quot;&gt;&quot;, cars, &quot;&lt;/a&gt;&quot;)
+) %&gt;%
+  gvisTable(options = list(allowHTML = T))</code></pre>
+<pre><code>## &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;
+##   &quot;https://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;
+## &lt;html xmlns=&quot;https://www.w3.org/1999/xhtml&quot;&gt;
+## &lt;head&gt;
+## &lt;title&gt;TableID3afd630827fb&lt;/title&gt;
+## &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot; /&gt;
+## &lt;style type=&quot;text/css&quot;&gt;
+## body {
+##   color: #444444;
+##   font-family: Arial,Helvetica,sans-serif;
+##   font-size: 75%;
+##   }
+##   a {
+##   color: #4D87C7;
+##   text-decoration: none;
+## }
+## &lt;/style&gt;
+## &lt;/head&gt;
+## &lt;body&gt;
+##  &lt;!-- Table generated in R 4.3.1 by googleVis 0.7.1 package --&gt;
+## &lt;!-- Tue Oct 24 15:05:08 2023 --&gt;
+## 
+## 
+## &lt;!-- jsHeader --&gt;
+## &lt;script type=&quot;text/javascript&quot;&gt;
+##  
+## // jsData 
+## function gvisDataTableID3afd630827fb () {
+## var data = new google.visualization.DataTable();
+## var datajson =
+## [
+##  [
+## &quot;Mazda RX4&quot;,
+## 21,
+## 6,
+## 160,
+## &quot;&lt;a href= &#39;https://www.google.com/search?q=Mazda+RX4&#39; &gt; Mazda RX4 &lt;/a&gt;&quot;
+## ],
+## [
+## &quot;Mazda RX4 Wag&quot;,
+## 21,
+## 6,
+## 160,
+## &quot;&lt;a href= &#39;https://www.google.com/search?q=Mazda+RX4+Wag&#39; &gt; Mazda RX4 Wag &lt;/a&gt;&quot;
+## ],
+## [
+## &quot;Datsun 710&quot;,
+## 22.8,
+## 4,
+## 108,
+## &quot;&lt;a href= &#39;https://www.google.com/search?q=Datsun+710&#39; &gt; Datsun 710 &lt;/a&gt;&quot;
+## ] 
+## ];
+## data.addColumn(&#39;string&#39;,&#39;cars&#39;);
+## data.addColumn(&#39;number&#39;,&#39;mpg&#39;);
+## data.addColumn(&#39;number&#39;,&#39;cyl&#39;);
+## data.addColumn(&#39;number&#39;,&#39;disp&#39;);
+## data.addColumn(&#39;string&#39;,&#39;url&#39;);
+## data.addRows(datajson);
+## return(data);
+## }
+##  
+## // jsDrawChart
+## function drawChartTableID3afd630827fb() {
+## var data = gvisDataTableID3afd630827fb();
+## var options = {};
+## options[&quot;allowHtml&quot;] = true;
+## options[&quot;allowHTML&quot;] = true;
+## 
+## 
+##     var chart = new google.visualization.Table(
+##     document.getElementById(&#39;TableID3afd630827fb&#39;)
+##     );
+##     chart.draw(data,options);
+##     
+## 
+## }
+##   
+##  
+## // jsDisplayChart
+## (function() {
+## var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+## var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+## var chartid = &quot;table&quot;;
+##   
+## // Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+## var i, newPackage = true;
+## for (i = 0; newPackage &amp;&amp; i &lt; pkgs.length; i++) {
+## if (pkgs[i] === chartid)
+## newPackage = false;
+## }
+## if (newPackage)
+##   pkgs.push(chartid);
+##   
+## // Add the drawChart function to the global list of callbacks
+## callbacks.push(drawChartTableID3afd630827fb);
+## })();
+## function displayChartTableID3afd630827fb() {
+##   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+##   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+##   window.clearTimeout(window.__gvisLoad);
+##   // The timeout is set to 100 because otherwise the container div we are
+##   // targeting might not be part of the document yet
+##   window.__gvisLoad = setTimeout(function() {
+##   var pkgCount = pkgs.length;
+##   google.load(&quot;visualization&quot;, &quot;1&quot;, { packages:pkgs, callback: function() {
+##   if (pkgCount != pkgs.length) {
+##   // Race condition where another setTimeout call snuck in after us; if
+##   // that call added a package, we must not shift its callback
+##   return;
+## }
+## while (callbacks.length &gt; 0)
+## callbacks.shift()();
+## } });
+## }, 100);
+## }
+##  
+## // jsFooter
+## &lt;/script&gt;
+##  
+## &lt;!-- jsChart --&gt;  
+## &lt;script type=&quot;text/javascript&quot; src=&quot;https://www.google.com/jsapi?callback=displayChartTableID3afd630827fb&quot;&gt;&lt;/script&gt;
+##  
+## &lt;!-- divChart --&gt;
+##   
+## &lt;div id=&quot;TableID3afd630827fb&quot; 
+##   style=&quot;width: 500; height: automatic;&quot;&gt;
+## &lt;/div&gt;
+##  &lt;div&gt;&lt;span&gt;Data: . &amp;#8226; Chart ID: &lt;a href=&quot;Chart_TableID3afd630827fb.html&quot;&gt;TableID3afd630827fb&lt;/a&gt; &amp;#8226; &lt;a href=&quot;https://mages.github.io/googleVis/&quot;&gt;googleVis-0.7.1&lt;/a&gt;&lt;/span&gt;&lt;br /&gt; 
+## &lt;!-- htmlFooter --&gt;
+## &lt;span&gt; 
+##   R version 4.3.1 (2023-06-16) 
+##   &amp;#8226; &lt;a href=&quot;https://developers.google.com/terms/&quot;&gt;Google Terms of Use&lt;/a&gt; &amp;#8226; &lt;a href=&quot;https://developers.google.com/chart/interactive/docs/gallery/table&quot;&gt;Documentation and Data Policy&lt;/a&gt;
+## &lt;/span&gt;&lt;/div&gt;
+## &lt;/body&gt;
+## &lt;/html&gt;</code></pre>
+<pre class="r"><code>library(DT)</code></pre>
+<pre class="r"><code>df %&gt;%
+  mutate(em_url = str_c(&quot;&lt;a href=&quot;, url, &quot;&gt;&quot;, cars, &quot;&lt;/a&gt;&quot;)) %&gt;%
+  # select(-url) %&gt;%
+  datatable(escape = F)</code></pre>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ec4df4b52f2e214a602c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ec4df4b52f2e214a602c">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["Mazda RX4","Mazda RX4 Wag","Datsun 710"],[21,21,22.8],[6,6,4],[160,160,108],["https://www.google.com/search?q=Mazda+RX4","https://www.google.com/search?q=Mazda+RX4+Wag","https://www.google.com/search?q=Datsun+710"],["<a href=https://www.google.com/search?q=Mazda+RX4>Mazda RX4<\/a>","<a href=https://www.google.com/search?q=Mazda+RX4+Wag>Mazda RX4 Wag<\/a>","<a href=https://www.google.com/search?q=Datsun+710>Datsun 710<\/a>"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>cars<\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>url<\/th>\n      <th>em_url<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 
 
