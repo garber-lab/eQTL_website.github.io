@@ -2,6 +2,11 @@
 title: "eQTL Website"
 ---
 
+```{r}
+library(tidyverse)
+```
+
+
 ```{r echo=FALSE}
 dplyr::as_tibble(mtcars[1:3, 1:3])
 
@@ -23,23 +28,68 @@ kable(mtcars[1:3, 1:3]) %>%
 
 
 ```{r}
-# outputs the HTML to an external file
+# prints the HTML below
 kable(mtcars[1:3, 1:3], "html") %>%
   kable_styling(bootstrap_options = c("striped", "hover")) %>%
-  cat(., file = "df.html")
+  cat()
 ```
+
+
+```{r}
+# converts the HTML to a single character string
+kable(mtcars[1:3, 1:3], "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  as.character()
+```
+
+
+https://github.com/rstudio/rmarkdown/issues/1296
 
 
 
 
 ```{r}
-library(xtable)
+# init. car names
+cars <- row.names(mtcars[1:3, 1:3])
+
+# init. search URLs for each car name
+search_urls <- paste0("https://www.google.com/search?q=", str_replace_all(cars, " ", "+"))
 ```
 
 
 ```{r}
-
+# library(googleVis)
 ```
+
+
+
+```{r}
+df <- as_tibble(mtcars[1:3, 1:3], rownames = "cars")
+
+df <- df %>%
+  mutate(url = search_urls)
+
+# transform(
+#   df,
+#   url = paste("<a href=", shQuote(url), ">", cars, "</a>")
+# ) %>%
+#   gvisTable(options = list(allowHTML = T))
+```
+
+
+
+```{r}
+library(DT)
+```
+
+
+```{r}
+df %>%
+  mutate(em_url = str_c("<a href=", url, ">", cars, "</a>")) %>%
+  # select(-url) %>%
+  datatable(escape = F)
+```
+
 
 
 
