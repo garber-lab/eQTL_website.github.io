@@ -2,7 +2,7 @@
 title: "eQTL Website"
 ---
 
-```{r}
+```{r include=FALSE}
 library(tidyverse)
 ```
 
@@ -27,7 +27,7 @@ kable(mtcars[1:3, 1:3]) %>%
 ```
 
 
-```{r}
+```{r include=FALSE}
 # prints the HTML below
 kable(mtcars[1:3, 1:3], "html") %>%
   kable_styling(bootstrap_options = c("striped", "hover")) %>%
@@ -35,7 +35,7 @@ kable(mtcars[1:3, 1:3], "html") %>%
 ```
 
 
-```{r}
+```{r include=FALSE}
 # converts the HTML to a single character string
 kable(mtcars[1:3, 1:3], "html") %>%
   kable_styling(bootstrap_options = c("striped", "hover")) %>%
@@ -48,7 +48,7 @@ https://github.com/rstudio/rmarkdown/issues/1296
 
 
 
-```{r}
+```{r include=FALSE}
 # init. car names
 cars <- row.names(mtcars[1:3, 1:3])
 
@@ -57,13 +57,13 @@ search_urls <- paste0("https://www.google.com/search?q=", str_replace_all(cars, 
 ```
 
 
-```{r}
+```{r include=FALSE}
 # library(googleVis)
 ```
 
 
 
-```{r}
+```{r include=FALSE}
 df <- as_tibble(mtcars[1:3, 1:3], rownames = "cars")
 
 df <- df %>%
@@ -78,7 +78,7 @@ df <- df %>%
 
 
 
-```{r}
+```{r include=FALSE}
 library(DT)
 ```
 
