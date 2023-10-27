@@ -6,17 +6,17 @@ title: "eQTL Website"
 library(tidyverse)
 ```
 
-# Basic Testing
+<!-- # Basic Testing -->
 
 
-```{r}
+```{r include=FALSE}
 dplyr::as_tibble(mtcars[1:3, 1:3])
 
 mtcars[1:3, 1:3]
 ```
 
 
-# Kable Testing
+<!-- # Kable Testing -->
 
 
 ```{r include=FALSE}
@@ -24,25 +24,25 @@ library(kableExtra)
 ```
 
 
-Bare kable-formatted table:
+<!-- Bare kable-formatted table: -->
 
-```{r}
+```{r include=FALSE}
 kable(mtcars[1:3, 1:3]) %>%
   kable_styling()
 ```
 
 
-Styled kable-formatted table:
+<!-- Styled kable-formatted table: -->
 
-```{r}
+```{r include=FALSE}
 kable(mtcars[1:3, 1:3], "html") %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 ```
 
 
-The corresponding HTML for the styled kable-formatted table:
+<!-- The corresponding HTML for the styled kable-formatted table: -->
 
-```{r}
+```{r include=FALSE}
 # prints the HTML below
 kable(mtcars[1:3, 1:3], "html") %>%
   kable_styling(bootstrap_options = c("striped", "hover")) %>%
@@ -50,7 +50,7 @@ kable(mtcars[1:3, 1:3], "html") %>%
 ```
 
 
-https://github.com/rstudio/rmarkdown/issues/1296
+<!-- https://github.com/rstudio/rmarkdown/issues/1296 -->
 
 
 # DT-HTML testing
@@ -114,9 +114,9 @@ df %>%
 
 
 
-# Render site
+<!-- # Render site -->
 
-```{r}
+```{r include=FALSE}
 # rmarkdown::render(input = "index.Rmd")
 ```
 

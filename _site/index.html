@@ -272,189 +272,12 @@ $(document).ready(function () {
 </div>
 
 
-<div id="basic-testing" class="section level1">
-<h1>Basic Testing</h1>
-<pre class="r"><code>dplyr::as_tibble(mtcars[1:3, 1:3])</code></pre>
-<pre><code>## # A tibble: 3 × 3
-##     mpg   cyl  disp
-##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1  21       6   160
-## 2  21       6   160
-## 3  22.8     4   108</code></pre>
-<pre class="r"><code>mtcars[1:3, 1:3]</code></pre>
-<pre><code>##                mpg cyl disp
-## Mazda RX4     21.0   6  160
-## Mazda RX4 Wag 21.0   6  160
-## Datsun 710    22.8   4  108</code></pre>
-</div>
-<div id="kable-testing" class="section level1">
-<h1>Kable Testing</h1>
-<p>Bare kable-formatted table:</p>
-<pre class="r"><code>kable(mtcars[1:3, 1:3]) %&gt;%
-  kable_styling()</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-mpg
-</th>
-<th style="text-align:right;">
-cyl
-</th>
-<th style="text-align:right;">
-disp
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Mazda RX4
-</td>
-<td style="text-align:right;">
-21.0
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-160
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mazda RX4 Wag
-</td>
-<td style="text-align:right;">
-21.0
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-160
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Datsun 710
-</td>
-<td style="text-align:right;">
-22.8
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-108
-</td>
-</tr>
-</tbody>
-</table>
-<p>Styled kable-formatted table:</p>
-<pre class="r"><code>kable(mtcars[1:3, 1:3], &quot;html&quot;) %&gt;%
-  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
-<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-mpg
-</th>
-<th style="text-align:right;">
-cyl
-</th>
-<th style="text-align:right;">
-disp
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Mazda RX4
-</td>
-<td style="text-align:right;">
-21.0
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-160
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mazda RX4 Wag
-</td>
-<td style="text-align:right;">
-21.0
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-160
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Datsun 710
-</td>
-<td style="text-align:right;">
-22.8
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-108
-</td>
-</tr>
-</tbody>
-</table>
-<p>The corresponding HTML for the styled kable-formatted table:</p>
-<pre class="r"><code># prints the HTML below
-kable(mtcars[1:3, 1:3], &quot;html&quot;) %&gt;%
-  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;%
-  cat()</code></pre>
-<pre><code>## &lt;table class=&quot;table table-striped table-hover&quot; style=&quot;margin-left: auto; margin-right: auto;&quot;&gt;
-##  &lt;thead&gt;
-##   &lt;tr&gt;
-##    &lt;th style=&quot;text-align:left;&quot;&gt;   &lt;/th&gt;
-##    &lt;th style=&quot;text-align:right;&quot;&gt; mpg &lt;/th&gt;
-##    &lt;th style=&quot;text-align:right;&quot;&gt; cyl &lt;/th&gt;
-##    &lt;th style=&quot;text-align:right;&quot;&gt; disp &lt;/th&gt;
-##   &lt;/tr&gt;
-##  &lt;/thead&gt;
-## &lt;tbody&gt;
-##   &lt;tr&gt;
-##    &lt;td style=&quot;text-align:left;&quot;&gt; Mazda RX4 &lt;/td&gt;
-##    &lt;td style=&quot;text-align:right;&quot;&gt; 21.0 &lt;/td&gt;
-##    &lt;td style=&quot;text-align:right;&quot;&gt; 6 &lt;/td&gt;
-##    &lt;td style=&quot;text-align:right;&quot;&gt; 160 &lt;/td&gt;
-##   &lt;/tr&gt;
-##   &lt;tr&gt;
-##    &lt;td style=&quot;text-align:left;&quot;&gt; Mazda RX4 Wag &lt;/td&gt;
-##    &lt;td style=&quot;text-align:right;&quot;&gt; 21.0 &lt;/td&gt;
-##    &lt;td style=&quot;text-align:right;&quot;&gt; 6 &lt;/td&gt;
-##    &lt;td style=&quot;text-align:right;&quot;&gt; 160 &lt;/td&gt;
-##   &lt;/tr&gt;
-##   &lt;tr&gt;
-##    &lt;td style=&quot;text-align:left;&quot;&gt; Datsun 710 &lt;/td&gt;
-##    &lt;td style=&quot;text-align:right;&quot;&gt; 22.8 &lt;/td&gt;
-##    &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
-##    &lt;td style=&quot;text-align:right;&quot;&gt; 108 &lt;/td&gt;
-##   &lt;/tr&gt;
-## &lt;/tbody&gt;
-## &lt;/table&gt;</code></pre>
-<p><a href="https://github.com/rstudio/rmarkdown/issues/1296"
-class="uri">https://github.com/rstudio/rmarkdown/issues/1296</a></p>
-</div>
+<!-- # Basic Testing -->
+<!-- # Kable Testing -->
+<!-- Bare kable-formatted table: -->
+<!-- Styled kable-formatted table: -->
+<!-- The corresponding HTML for the styled kable-formatted table: -->
+<!-- https://github.com/rstudio/rmarkdown/issues/1296 -->
 <div id="dt-html-testing" class="section level1">
 <h1>DT-HTML testing</h1>
 <p>Regular tibble:</p>
@@ -473,12 +296,9 @@ df %&gt;%
   mutate(em_url = str_c(&quot;&lt;a href=&quot;, url, &quot;&gt;&quot;, cars, &quot;&lt;/a&gt;&quot;)) %&gt;%
   # select(-url) %&gt;%
   datatable(escape = F, style = &quot;auto&quot;)</code></pre>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d45a3788b690fbe163ba" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d45a3788b690fbe163ba">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["Mazda RX4","Mazda RX4 Wag","Datsun 710"],[21,21,22.8],[6,6,4],[160,160,108],["https://www.google.com/search?q=Mazda+RX4","https://www.google.com/search?q=Mazda+RX4+Wag","https://www.google.com/search?q=Datsun+710"],["<a href=https://www.google.com/search?q=Mazda+RX4>Mazda RX4<\/a>","<a href=https://www.google.com/search?q=Mazda+RX4+Wag>Mazda RX4 Wag<\/a>","<a href=https://www.google.com/search?q=Datsun+710>Datsun 710<\/a>"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>cars<\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>url<\/th>\n      <th>em_url<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</div>
-<div id="render-site" class="section level1">
-<h1>Render site</h1>
-<pre class="r"><code># rmarkdown::render(input = &quot;index.Rmd&quot;)</code></pre>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d9371064bbccb94df7dd" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-d9371064bbccb94df7dd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["Mazda RX4","Mazda RX4 Wag","Datsun 710"],[21,21,22.8],[6,6,4],[160,160,108],["https://www.google.com/search?q=Mazda+RX4","https://www.google.com/search?q=Mazda+RX4+Wag","https://www.google.com/search?q=Datsun+710"],["<a href=https://www.google.com/search?q=Mazda+RX4>Mazda RX4<\/a>","<a href=https://www.google.com/search?q=Mazda+RX4+Wag>Mazda RX4 Wag<\/a>","<a href=https://www.google.com/search?q=Datsun+710>Datsun 710<\/a>"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>cars<\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>url<\/th>\n      <th>em_url<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<!-- # Render site -->
 </div>
 
 
