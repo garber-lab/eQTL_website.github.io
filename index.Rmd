@@ -114,4 +114,9 @@ df %>%
 
 
 
+# Render site
+
+```{r}
+# rmarkdown::render(input = "index.Rmd")
+```
 
