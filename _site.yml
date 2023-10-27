@@ -1,4 +1,5 @@
 name: "eQTL-website"
+output_dir: "."               # render all site content within the root directory
 navbar:
   title: "eQTL Website"
   left:
