@@ -32,16 +32,6 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="site_libs/datatables-binding-0.30/datatables.js"></script>
-<link href="site_libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="site_libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="site_libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
-<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -255,6 +245,9 @@ $(document).ready(function () {
         <li>
   <a href="index.html">Home</a>
 </li>
+<li>
+  <a href="mtcars.html">mtcars Test</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -272,33 +265,8 @@ $(document).ready(function () {
 </div>
 
 
-<!-- # Basic Testing -->
-<!-- # Kable Testing -->
-<!-- Bare kable-formatted table: -->
-<!-- Styled kable-formatted table: -->
-<!-- The corresponding HTML for the styled kable-formatted table: -->
-<!-- https://github.com/rstudio/rmarkdown/issues/1296 -->
-<div id="dt-html-testing" class="section level1">
-<h1>DT-HTML testing</h1>
-<p>Regular tibble:</p>
-<pre class="r"><code># display regular tibble with embedded URL
-df %&gt;%
-  mutate(em_url = str_c(&quot;&lt;a href=&quot;, url, &quot;&gt;&quot;, cars, &quot;&lt;/a&gt;&quot;))</code></pre>
-<pre><code>## # A tibble: 3 × 6
-##   cars            mpg   cyl  disp url                                     em_url
-##   &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                                   &lt;chr&gt; 
-## 1 Mazda RX4      21       6   160 https://www.google.com/search?q=Mazda+… &lt;a hr…
-## 2 Mazda RX4 Wag  21       6   160 https://www.google.com/search?q=Mazda+… &lt;a hr…
-## 3 Datsun 710     22.8     4   108 https://www.google.com/search?q=Datsun… &lt;a hr…</code></pre>
-<p>HTML widget tibble:</p>
-<pre class="r"><code># display tibble as HTML widget
-df %&gt;%
-  mutate(em_url = str_c(&quot;&lt;a href=&quot;, url, &quot;&gt;&quot;, cars, &quot;&lt;/a&gt;&quot;)) %&gt;%
-  # select(-url) %&gt;%
-  datatable(escape = F, style = &quot;auto&quot;)</code></pre>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9ffed986692ef6b22679" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-9ffed986692ef6b22679">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["Mazda RX4","Mazda RX4 Wag","Datsun 710"],[21,21,22.8],[6,6,4],[160,160,108],["https://www.google.com/search?q=Mazda+RX4","https://www.google.com/search?q=Mazda+RX4+Wag","https://www.google.com/search?q=Datsun+710"],["<a href=https://www.google.com/search?q=Mazda+RX4>Mazda RX4<\/a>","<a href=https://www.google.com/search?q=Mazda+RX4+Wag>Mazda RX4 Wag<\/a>","<a href=https://www.google.com/search?q=Datsun+710>Datsun 710<\/a>"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>cars<\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>url<\/th>\n      <th>em_url<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-<!-- # Render site -->
+<div id="come-back-later" class="section level2">
+<h2>Come Back Later…</h2>
 </div>
 
 
