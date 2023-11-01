@@ -5,3 +5,5 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+    - text: "mtcars Test"
+      href: mtcars.html
