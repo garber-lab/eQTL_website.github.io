@@ -2,4 +2,24 @@
 title: "eQTL Website"
 ---
 
-## Come Back Later...
+
+```{r include=FALSE}
+# init. filepath
+path_to_genes <- "website/data/plots/"
+# init. genes names to store in DF
+genes <- list.files(path_to_genes)
+
+# init. DF with gene and SNP combos
+df <- tibble(
+  gene = genes,
+  snp = NA
+)
+
+for (gene in genes) {
+  # init. number of SNPs
+  
+}
+```
+
+
+
