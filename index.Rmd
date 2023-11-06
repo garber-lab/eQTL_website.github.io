@@ -3,6 +3,14 @@ title: "eQTL Website"
 ---
 
 
+```{r init, include=FALSE}
+library(tidyverse)
+# import package to allow R data objects to be displayed as tables on HTML pages
+library(DT)
+```
+
+
+
 ```{r include=FALSE}
 # init. filepath
 path_to_genes <- "website/data/plots/"
@@ -11,15 +19,31 @@ genes <- list.files(path_to_genes)
 
 # init. DF with gene and SNP combos
 df <- tibble(
-  gene = genes,
+  gene = NA,
   snp = NA
 )
 
 for (gene in genes) {
-  # init. number of SNPs
+  # init. vector of SNPs for each gene
+  snps <- list.files(str_c(path_to_genes, gene))
   
+  # init. temporary DF to store each gene-SNP combination
+  temp_df <- tibble(gene = gene, snp = snps)
+  
+  # bind DF with temporary DF
+  df <- bind_rows(df, temp_df)
 }
+
+df <- df %>%
+  filter(!is.na(gene)) %>%
+  datatable(escape = F, style = "auto")
 ```
+
+
+```{r display table, echo=FALSE}
+df
+```
+
 
 
 
