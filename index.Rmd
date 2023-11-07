@@ -76,8 +76,8 @@ url_snp_base <- "https://www.ncbi.nlm.nih.gov/snp/"
 
 feat_select_CPM %>%
   mutate(
-    GENE = str_c("<a href=", url_gene_base, GENE, ">", GENE, "</a>"),
-    SNP = str_c("<a href=", url_snp_base, SNP, ">", SNP, "</a>")
+    GENE = str_c("<a href=", url_gene_base, GENE, " target=_blank", ">", GENE, "</a>"),
+    SNP = str_c("<a href=", url_snp_base, SNP, " target=_blank", ">", SNP, "</a>")
   ) %>%
   datatable(escape = F, style = "auto")
 ```
