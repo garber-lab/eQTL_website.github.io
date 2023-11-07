@@ -70,7 +70,15 @@ feat_select_CPM <- feat_select_CPM %>%
 
 
 ```{r echo=FALSE}
+# init. URL base
+url_gene_base <- "https://www.ncbi.nlm.nih.gov/gene/?term="
+url_snp_base <- "https://www.ncbi.nlm.nih.gov/snp/"
+
 feat_select_CPM %>%
+  mutate(
+    GENE = str_c("<a href=", url_gene_base, GENE, ">", GENE, "</a>"),
+    SNP = str_c("<a href=", url_snp_base, SNP, ">", SNP, "</a>")
+  ) %>%
   datatable(escape = F, style = "auto")
 ```
 
