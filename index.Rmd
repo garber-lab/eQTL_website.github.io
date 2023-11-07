@@ -10,6 +10,7 @@ library(DT)
 ```
 
 
+## Regular Gene-SNP table
 
 ```{r include=FALSE}
 # init. filepath
@@ -34,15 +35,45 @@ for (gene in genes) {
   df <- bind_rows(df, temp_df)
 }
 
-df <- df %>%
-  filter(!is.na(gene)) %>%
-  datatable(escape = F, style = "auto")
+df <- df %>% filter(!is.na(gene))
+
+# df <- df %>%
+#   filter(!is.na(gene)) %>%
+#   datatable(escape = F, style = "auto")
 ```
+
 
 
 ```{r display table, echo=FALSE}
-df
+df_html <- df %>%
+  datatable(escape = F, style = "auto")
+
+df_html
 ```
+
+
+---
+
+
+## Feature-Selected Model: Phenotype CPM
+
+```{r feature_selected_models, include=FALSE}
+# read in different modeling results as tables
+feat_select_CPM <- read_tsv("website/data/modeling_results/modeling_results_featureSelectedModel_phenotypeCPM.txt")
+
+feat_select_CPM <- feat_select_CPM %>%
+  left_join(
+    df,
+    by = c("GENE" = "gene", "SNP" = "snp")
+  )
+```
+
+
+```{r echo=FALSE}
+feat_select_CPM %>%
+  datatable(escape = F, style = "auto")
+```
+
 
 
 
