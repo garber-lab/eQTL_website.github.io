@@ -44,7 +44,7 @@ df <- df %>% filter(!is.na(gene))
 
 
 
-```{r display table, echo=FALSE}
+```{r display table, echo=FALSE, include=FALSE}
 df_html <- df %>%
   datatable(escape = F, style = "auto")
 
@@ -54,10 +54,44 @@ df_html
 
 ---
 
+## Feature-Selected Model: Phenotype Rank-Normalized CPM
+
+
+```{r include=FALSE}
+# read in feature selected rank-normalized CPM model
+fs_rank_norm_cpm <- read_tsv("website/data/modeling_results/modeling_results_featureSelectedModel_phenotypeRankNormCPM.txt")
+
+
+fs_rank_norm_cpm <- fs_rank_norm_cpm %>%
+  left_join(
+    df,
+    by = c("GENE" = "gene", "SNP" = "snp")
+  )
+```
+
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# init. URL base
+url_gene_base <- "https://www.genecards.org/cgi-bin/carddisp.pl?gene="
+url_snp_base <- "https://www.ncbi.nlm.nih.gov/snp/"
+
+fs_rank_norm_cpm %>%
+  mutate(
+    GENE = str_c("<a href=", url_gene_base, GENE, " target=_blank", ">", GENE, "</a>"),
+    SNP = str_c("<a href=", url_snp_base, SNP, " target=_blank", ">", SNP, "</a>")
+  ) %>%
+  datatable(escape = F, style = "auto")
+```
+
+
+
+
+---
+
 
 ## Feature-Selected Model: Phenotype CPM
 
-```{r feature_selected_models, include=FALSE}
+```{r feature_selected_models, include=FALSE, eval=FALSE}
 # read in different modeling results as tables
 feat_select_CPM <- read_tsv("website/data/modeling_results/modeling_results_featureSelectedModel_phenotypeCPM.txt")
 
@@ -69,7 +103,7 @@ feat_select_CPM <- feat_select_CPM %>%
 ```
 
 
-```{r echo=FALSE}
+```{r include=FALSE, eval=FALSE}
 # init. URL base
 url_gene_base <- "https://www.ncbi.nlm.nih.gov/gene/?term="
 url_snp_base <- "https://www.ncbi.nlm.nih.gov/snp/"
