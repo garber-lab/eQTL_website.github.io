@@ -78,8 +78,10 @@ url_snp_base <- "https://www.ncbi.nlm.nih.gov/snp/"
 fs_rank_norm_cpm %>%
   mutate(
     GENE = str_c("<a href=", url_gene_base, GENE, " target=_blank", ">", GENE, "</a>"),
-    SNP = str_c("<a href=", url_snp_base, SNP, " target=_blank", ">", SNP, "</a>")
+    SNP = str_c("<a href=", url_snp_base, SNP, " target=_blank", ">", SNP, "</a>"),
+    Actions = str_c("LDlink", "IGV Browser", sep = ", ")
   ) %>%
+  select(pair:GENE, Actions, everything()) %>%
   datatable(escape = F, style = "auto")
 ```
 
