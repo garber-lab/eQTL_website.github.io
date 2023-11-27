@@ -1,0 +1,1 @@
+source activate fastQTL; Rscript /pi/manuel.garber-umw/human/skin/eQTLs/DREG/scripts/make_DREG_plots_for_website.R /pi/manuel.garber-umw/nl/human/skin/eQTLs/website/data/plots/APOL4/rs1053982 APOL4 rs1053982 

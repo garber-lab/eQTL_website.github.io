@@ -1,0 +1,44 @@
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@r640c61>
+Subject: Job 733911: <source activate fastQTL; Rscript /pi/manuel.garber-umw/human/skin/eQTLs/DREG/scripts/make_DREG_plots_for_website.R /pi/manuel.garber-umw/nl/human/skin/eQTLs/website/data/plots/APOL4/rs1053982 APOL4 rs1053982> in cluster <sci> Exited
+
+Job <source activate fastQTL; Rscript /pi/manuel.garber-umw/human/skin/eQTLs/DREG/scripts/make_DREG_plots_for_website.R /pi/manuel.garber-umw/nl/human/skin/eQTLs/website/data/plots/APOL4/rs1053982 APOL4 rs1053982> was submitted from host <hpcc03> by user <shuo.shan-umw> in cluster <sci> at Sat Sep  9 05:55:43 2023
+Job was executed on host(s) <r640c61>, in queue <long>, as user <shuo.shan-umw> in cluster <sci> at Sat Sep  9 05:55:43 2023
+</home/shuo.shan-umw> was used as the home directory.
+</pi/manuel.garber-umw/human/skin/eQTLs/website/data/plots/APOL4/rs1053982> was used as the working directory.
+Started at Sat Sep  9 05:55:43 2023
+Terminated at Sat Sep  9 05:55:56 2023
+Results reported at Sat Sep  9 05:55:56 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+source activate fastQTL; Rscript /pi/manuel.garber-umw/human/skin/eQTLs/DREG/scripts/make_DREG_plots_for_website.R /pi/manuel.garber-umw/nl/human/skin/eQTLs/website/data/plots/APOL4/rs1053982 APOL4 rs1053982
+
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   7.99 sec.
+    Max Memory :                                 176 MB
+    Average Memory :                             138.00 MB
+    Total Requested Memory :                     10200.00 MB
+    Delta Memory :                               10024.00 MB
+    Max Swap :                                   -
+    Max Processes :                              5
+    Max Threads :                                6
+    Run time :                                   13 sec.
+    Turnaround time :                            13 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <./7339110.err> for stderr output of this job.
+
