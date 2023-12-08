@@ -51,10 +51,34 @@ df_html <- df %>%
 df_html
 ```
 
+---
+
+## LD Trait Association
+
+TODO: 
+
+* load this table in a separate tab
+* make a dropdown menu for `GWAS_Trait` 
+* select specific SNPs to view (from `Query`) -- optional for now
+* make `R2` filterable (e.g., view everything between x and y)
+* make hyperlink from the Feature-Selected table that shows the LDTrait records for the specific SNP (`Query`)
+    - filter for the SNP
+
+```{r}
+ld_trait_assoc <- read_tsv("QTLs_LDtrait_association_ALLpopulation_r20.1.txt")
+```
+
+
+
 
 ---
 
 ## Feature-Selected Model: Phenotype Rank-Normalized CPM
+
+To-Do:
+
+* convert numeric cols to scientific notation
+* link the GTEx IGV browser to the table ("location=....")
 
 
 ```{r include=FALSE}
@@ -94,14 +118,47 @@ fs_rank_norm_cpm %>%
     # plots = str_c("![Paired Plot CPM](website/data/plots", GENE, SNP, "pairedPlot_3donorColored_CPM.png)", sep = "/"),
     # plots = str_c("<img src=website/data/plots/", GENE, SNP, "pairedPlot_3donorColored_CPM.png target=_blank>Paired Plot CPM</img>", sep = "/"),
     plots = str_c("<a href=website/data/plots/", GENE, "/", SNP, "/", "pairedPlot_3donorColored_CPM.png target=_blank>Paired Plot CPM</a>"),
-    Actions = str_c("LDlink", "IGV Browser", sep = ", ")
+    Actions = str_c("LDlink", "IGV Browser", sep = ", "),
+    # convert specific cols to sci notation
+    across(.cols = str_subset(colnames(.), "(pval|pperm|beta|_se)"),
+           .fns = ~ format(as.numeric(.x), scientific = TRUE, digits = 3))
   ) %>%
   select(pair, snp, gene, plots, Actions, everything(), -c(GENE, SNP)) %>%
   datatable(escape = F, style = "auto")
+
+# options(scipen = 3)
 ```
 
 
 ![Paired Plot CPM](./website/data/plots/THUMPD2/rs6759076/pairedPlot_3donorColored_CPM.png)
+
+
+reate mode 100644 website/example/ERAP2/rs10038651/ERAP2_rs10038651.html
+ create mode 100644 website/example/ERAP2/rs10038651/FRB_plot.pdf
+ create mode 100644 website/example/ERAP2/rs10038651/KRT_plot.pdf
+ create mode 100644 website/example/ERAP2/rs10038651/MEL_plot.pdf
+ create mode 100644 website/example/ERAP2/rs10038651/modeling_result_FRB.txt
+ create mode 100644 website/example/ERAP2/rs10038651/modeling_result_KRT.txt
+ create mode 100644 website/example/ERAP2/rs10038651/modeling_result_MEL.txt
+ create mode 100644 website/example/ERAP2/snps.txt
+UMMSMAC-G7JPHWFY6Y:eQTL_website.github.io tjacob$ 
+UMMSMAC-G7JPHWFY6Y:eQTL_website.github.io tjacob$ git push -u origin HEAD:main
+Enter passphrase for key '/Users/tjacob/.ssh/id_ecdsa': 
+Enumerating objects: 79850, done.
+Counting objects: 100% (79850/79850), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (67563/67563), done.
+remote: fatal: pack exceeds maximum allowed size (2.00 GiB)
+error: remote unpack failed: index-pack failed| 8.91 MiB/s
+To github.com:garber-lab/eQTL_website.github.io.git
+ ! [remote rejected]     HEAD -> main (failed)
+error: failed to push some refs to 'github.com:garber-lab/eQTL_website.github.io.git'
+
+
+```{r}
+list.files("website/data/plots/") %>% str_subset("^G")
+```
+
 
 
 
