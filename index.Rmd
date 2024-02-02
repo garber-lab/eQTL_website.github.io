@@ -2,6 +2,7 @@
 title: "eQTL Website"
 ---
 
+New example!!!!
 
 ```{r init, include=FALSE}
 library(tidyverse)
@@ -156,7 +157,7 @@ error: failed to push some refs to 'github.com:garber-lab/eQTL_website.github.io
 
 
 ```{r}
-list.files("website/data/plots/") %>% str_subset("^G")
+list.files("website/data/plots/") %>% str_subset("^I")
 ```
 
 
