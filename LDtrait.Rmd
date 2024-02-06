@@ -1,0 +1,28 @@
+---
+title: "LDtrait"
+author: "Crystal Shan"
+date: "2024-02-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, include=FALSE}
+library(tidyverse)
+library(DT)
+```
+
+# LDtrait table of QTLs
+```{r load-table}
+# directory
+tab <- data.table::fread("website/data/modeling_results/QTLs_LDtrait_association_ALLpopulation_r20.1.txt")
+colnames(tab)[1] <- "Query_SNP"
+colnames(tab)[4] <- "GWAS_SNP_in_LD"
+
+df_html <- tab %>%
+  datatable(escape = F, style = "auto")
+
+df_html
+```

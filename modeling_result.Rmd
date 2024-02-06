@@ -1,0 +1,45 @@
+---
+title: "modeling_result"
+author: "Crystal Shan"
+date: "2024-02-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, include=FALSE}
+library(tidyverse)
+library(DT)
+```
+
+# Feature-Selected Model: Phenotype Rank-Normalized CPM
+```{r include=FALSE, warning=FALSE}
+# read in feature selected rank-normalized CPM model
+fs_rank_norm_cpm <- data.table::fread("website/data/modeling_results/modeling_results_featureSelectedModel_phenotypeRankNormCPM.txt")
+fs_rank_norm_cpm <- fs_rank_norm_cpm %>% mutate(across(.cols = str_subset(colnames(.), "(pval|pperm|beta|_se)"),
+                                                       .fns = ~ format(as.numeric(.x), scientific = TRUE, digits = 3)))
+```
+
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# init. URL base
+url_gene_base <- "https://www.genecards.org/cgi-bin/carddisp.pl?gene="
+url_snp_base <- "https://www.ncbi.nlm.nih.gov/snp/"
+
+# embed hyperlinks for each SNP and gene
+fs_rank_norm_cpm <- fs_rank_norm_cpm %>%
+  mutate(
+    gene = str_c("<a href=", url_gene_base, GENE, " target=_blank", ">", GENE, "</a>"),
+    snp = str_c("<a href=", url_snp_base, SNP, " target=_blank", ">", SNP, "</a>"),
+    plots = str_c("<a href=website/data/plots/", GENE, "/", SNP, "/", "pairedPlot_3donorColored_CPM.png target=_blank>Paired Plot CPM</a>"),
+    Actions = str_c("IGV Browser", sep = ", ")) %>%
+  select(pair, snp, gene, plots, Actions, everything(), -c(GENE, SNP)) %>%
+  datatable(escape = F, style = "auto")
+
+df_html <- fs_rank_norm_cpm %>%
+  datatable(escape = F, style = "auto")
+df_html
+```
+

@@ -3,7 +3,7 @@ output_dir: "."               # render all site content within the root director
 navbar:
   title: "eQTL Website"
   left:
-    - text: "Home"
-      href: index.html
-    - text: "mtcars Test"
-      href: mtcars.html
+    - text: "modeling_result"
+      href: modeling_result.html
+    - text: "LDtrait"
+      href: LDtrait.html
