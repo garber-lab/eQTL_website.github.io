@@ -4,6 +4,6 @@ navbar:
   title: "eQTL Website"
   left:
     - text: "modeling_result"
-      href: modeling_result.html
+      href: index.html
     - text: "LDtrait"
       href: LDtrait.html
