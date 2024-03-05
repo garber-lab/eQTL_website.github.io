@@ -1,0 +1,66 @@
+---
+title: "plot-paired-plot"
+author: "Crystal Shan"
+date: "2024-03-04"
+runtime: shiny
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, include=FALSE}
+library(tidyverse)
+library(magrittr)
+library(ggpubr)
+library(gridExtra)
+library(grid)
+library(cowplot)
+library(shiny)
+load("website/data/modeling_results/data_for_plotting_on_demand.RData")
+```
+
+# input gene and snp
+```{r shiny, echo=FALSE}
+# Define UI for application
+ui <- fluidPage(
+  
+  # Application title
+  titlePanel("Plotting on-demand"),
+  
+  # Sidebar layout with input and output definitions
+  sidebarLayout(
+    sidebarPanel(
+      # Text input
+      textInput("input_gene", "Enter gene name:", ""),
+      textInput("input_snp", "Enter SNP ID:",""),
+      
+      # Plot button
+      actionButton("plot_button", "Plot")
+    ),
+    
+    # Output: Plot
+    mainPanel(
+      plotOutput("text_plot")
+    )
+  )
+)
+
+# Define server logic
+server <- function(input, output) {
+  
+  # Render plot when plot button is clicked
+  observeEvent(input$plot_button, {
+    gene <- input$input_gene
+    snp <- input$input_snp
+    output$text_plot <- renderPlot({
+      make_reQTL_plot_CPM_3cts(snp, gene)
+    })
+  })
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
+
+```
