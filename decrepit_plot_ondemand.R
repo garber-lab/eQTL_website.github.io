@@ -1,28 +1,20 @@
----
-title: "plot-paired-plot"
-author: "Crystal Shan"
-date: "2024-03-04"
-runtime: shiny
-output: html_document
----
+#
+# This is a Shiny web application. You can run the application by clicking
+# the 'Run App' button above.
+#
+# Find out more about building applications with Shiny here:
+#
+#    http://shiny.rstudio.com/
+#
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r packages, include=FALSE}
+library(shiny)
 library(tidyverse)
 library(magrittr)
 library(ggpubr)
 library(gridExtra)
 library(grid)
 library(cowplot)
-library(shiny)
-load("website/data/modeling_results/data_for_plotting_on_demand.RData")
-```
 
-# input gene and snp
-```{r shiny, echo=FALSE}
 # Define UI for application
 ui <- fluidPage(
   
@@ -49,18 +41,22 @@ ui <- fluidPage(
 
 # Define server logic
 server <- function(input, output) {
+  print("loading environment")
+  dataEnv <- new.env()
+  load("~/Downloads/eQTL_website.github.io/website/data/modeling_results/data_for_plotting_on_demand.RData", envir = dataEnv)
+  print("loaded environment")
   
   # Render plot when plot button is clicked
   observeEvent(input$plot_button, {
+    print("plot button clicked")
     gene <- input$input_gene
     snp <- input$input_snp
     output$text_plot <- renderPlot({
-      make_reQTL_plot_CPM_3cts(snp, gene)
+      print("Calling make_reQTL_plot_CPM_3cts")
+      dataEnv$make_reQTL_plot_CPM_3cts(snp, gene, dataEnv)
     })
   })
 }
 
 # Run the application
 shinyApp(ui = ui, server = server)
-
-```
