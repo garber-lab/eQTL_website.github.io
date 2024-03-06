@@ -15,11 +15,14 @@ library(DT)
 ```
 
 # LDtrait table of QTLs
-```{r load-table}
+```{r load-table, echo=FALSE, warning=FALSE}
 # directory
-tab <- data.table::fread("website/data/modeling_results/QTLs_LDtrait_association_ALLpopulation_r20.1.txt")
+tab <- data.table::fread("website/data/modeling_results/QTLs_LDtrait_association_ALLpopulation_r20.6.txt")
 colnames(tab)[1] <- "Query_SNP"
-colnames(tab)[4] <- "GWAS_SNP_in_LD"
+colnames(tab)[2] <- "GWAS_SNP_in_LD"
+colnames(tab)[3] <- "LD_R2"
+tab$P_value <- format(as.numeric(tab$P_value), scientific = TRUE, digits = 3)
+tab$LD_R2 <- format(as.numeric(tab$LD_R2), scientific = FALSE, digits = 3)
 
 df_html <- tab %>%
   datatable(escape = F, style = "auto")
