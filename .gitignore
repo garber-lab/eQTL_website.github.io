@@ -1,6 +1,5 @@
 # filetypes to ignore
 *.Rhistory
-*.RData
 *.Ruserdata
 *.DS_Store
 
@@ -10,6 +9,7 @@
 !*.md
 !*.html
 !*.Rproj
+!*.RData
 
 
 # specific files to ignore

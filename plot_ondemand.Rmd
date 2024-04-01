@@ -1,0 +1,117 @@
+---
+title: "plot_ondemand"
+author: "Crystal Shan"
+date: "2024-04-01"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r main, include=FALSE}
+
+library(shiny)
+library(ggplot2)
+
+load(file="temp_test.RData")
+
+# Define UI for application
+ui <- fluidPage(
+  
+  # Application title
+  titlePanel("Plotting on-demand (Gene_LLPSX, Gene_NEUO3, Gene_MQDSR"),
+  
+  # Sidebar layout with input and output definitions
+  sidebarLayout(
+    sidebarPanel(
+      # Text input
+      textInput("input_gene", "Enter gene name:", ""),
+      
+      # Plot button
+      actionButton("plot_button", "Plot")
+    ),
+    
+    # Output: Plot
+    mainPanel(
+      plotOutput("text_plot")
+    )
+  )
+)
+
+# Define server logic
+server <- function(input, output) {
+  
+  # Render plot when plot button is clicked
+  observeEvent(input$plot_button, {
+    print("plot button clicked")
+    gene <- input$input_gene
+    output$text_plot <- renderPlot({
+      print("Calling plotting function")
+      plot_gene_expression(table, gene)
+    })
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+# library(shiny)
+# library(tidyverse)
+# library(magrittr)
+# library(ggpubr)
+# library(gridExtra)
+# library(grid)
+# library(cowplot)
+# 
+# # Define UI for application
+# ui <- fluidPage(
+#   
+#   # Application title
+#   titlePanel("Plotting on-demand"),
+#   
+#   # Sidebar layout with input and output definitions
+#   sidebarLayout(
+#     sidebarPanel(
+#       # Text input
+#       textInput("input_gene", "Enter gene name:", ""),
+#       textInput("input_snp", "Enter SNP ID:",""),
+#       
+#       # Plot button
+#       actionButton("plot_button", "Plot")
+#     ),
+#     
+#     # Output: Plot
+#     mainPanel(
+#       plotOutput("text_plot")
+#     )
+#   )
+# )
+# 
+# # Define server logic
+# server <- function(input, output) {
+#   print("loading environment")
+#   dataEnv <- new.env()
+#   load("~/Downloads/eQTL_website.github.io/website/data/modeling_results/data_for_plotting_on_demand.RData", envir = dataEnv)
+#   print("loaded environment")
+#   
+#   # Render plot when plot button is clicked
+#   observeEvent(input$plot_button, {
+#     print("plot button clicked")
+#     gene <- input$input_gene
+#     snp <- input$input_snp
+#     output$text_plot <- renderPlot({
+#       print("Calling make_reQTL_plot_CPM_3cts")
+#       dataEnv$make_reQTL_plot_CPM_3cts(snp, gene, dataEnv)
+#     })
+#   })
+# }
+# 
+# 
+# 
+# # Run the application
+# shinyApp(ui = ui, server = server)
+
+
+```

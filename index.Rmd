@@ -17,9 +17,16 @@ library(DT)
 # Feature-Selected Model: Phenotype Rank-Normalized CPM
 ```{r include=FALSE, warning=FALSE}
 # read in feature selected rank-normalized CPM model
-fs_rank_norm_cpm <- data.table::fread("website/data/modeling_results/modeling_results_featureSelectedModel_phenotypeRankNormCPM.txt")
-fs_rank_norm_cpm <- fs_rank_norm_cpm %>% mutate(across(.cols = str_subset(colnames(.), "(pval|pperm|beta|_se)"),
-                                                       .fns = ~ format(as.numeric(.x), scientific = TRUE, digits = 3)))
+fs_rank_norm_cpm <- data.table::fread("website/data/modeling_results/modelingResults_featureSelectedRankNormCPM_QTLs_1E-5PvalCutoff_3cts.txt")
+
+fs_rank_norm_cpm$reQTL_pval <- as.numeric(fs_rank_norm_cpm$reQTL_pval)
+fs_rank_norm_cpm$reQTL_beta <- as.numeric(fs_rank_norm_cpm$reQTL_beta)
+fs_rank_norm_cpm$PBSeQTL_pval <- as.numeric(fs_rank_norm_cpm$PBSeQTL_pval)
+fs_rank_norm_cpm$PBSeQTL_beta <- as.numeric(fs_rank_norm_cpm$PBSeQTL_beta)
+fs_rank_norm_cpm$IFNeQTL_pval <- as.numeric(fs_rank_norm_cpm$IFNeQTL_pval)
+fs_rank_norm_cpm$IFNeQTL_beta <- as.numeric(fs_rank_norm_cpm$IFNeQTL_beta)
+
+#sum(!is.na(fs_rank_norm_cpm$reQTL_pval) & !is.numeric(fs_rank_norm_cpm$reQTL_pval))
 ```
 
 
