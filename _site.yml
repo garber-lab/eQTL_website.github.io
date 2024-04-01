@@ -7,5 +7,5 @@ navbar:
       href: index.html
     - text: "LDtrait"
       href: LDtrait.html
-    - test: "plot"
+    - text: "plot"
       href: app.R/index.html
