@@ -8,4 +8,4 @@ navbar:
     - text: "LDtrait"
       href: LDtrait.html
     - text: "plot"
-      href: app.R/index.html
+      href: plot.html
